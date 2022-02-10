@@ -31,6 +31,8 @@ import org.apache.maven.scm.repository.ScmRepository;
 import org.apache.maven.scm.tck.command.changelog.ChangeLogCommandTckTest;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.startsWith;
@@ -228,5 +230,14 @@ public abstract class GitChangeLogCommandTckTest
         assertThat( "bad commit SHA1 retrieved", logEntries.get( 1 ).getRevision(), startsWith( "e3864d9" ) );
         assertThat( "bad commit SHA1 retrieved", logEntries.get( 2 ).getRevision(), startsWith( "0f1e817" ) );
         assertThat( "bad commit SHA1 retrieved", logEntries.get( 3 ).getRevision(), startsWith( "e75cb5a" ) );
+
+        List<String> tags4 = Arrays.asList( "Tag4a", "Tag4b" );
+        List<String> tags2 = Collections.singletonList( "Tag2" );
+        List<String> noTags = Collections.emptyList();
+
+        assertEquals( "Incorrect tags found", tags4,  logEntries.get( 0 ).getTags() );
+        assertEquals( "Incorrect tags found", noTags, logEntries.get( 1 ).getTags() );
+        assertEquals( "Incorrect tags found", tags2,  logEntries.get( 2 ).getTags() );
+        assertEquals( "Incorrect tags found", noTags, logEntries.get( 3 ).getTags() );
     }
 }

@@ -51,7 +51,14 @@
       <groupId>org.eclipse.jgit</groupId>
       <artifactId>org.eclipse.jgit</artifactId>
       <version>4.5.4.201711221230-r</version>
+<!--      <version>6.0.0.202111291000-r</version>-->
     </dependency>
+
+<!--    <dependency>-->
+<!--      <groupId>org.openl.jgit</groupId>-->
+<!--      <artifactId>org.eclipse.jgit.ssh.jsch</artifactId>-->
+<!--      <version>6.0.0.202202081800-r</version>-->
+<!--    </dependency>-->
 
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -59,6 +66,7 @@
       <version>1.7.25</version>
       <scope>test</scope>
     </dependency>
+
   </dependencies>
 
   <build>

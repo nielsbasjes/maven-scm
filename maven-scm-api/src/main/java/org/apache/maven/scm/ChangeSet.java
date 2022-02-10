@@ -115,7 +115,12 @@ public class ChangeSet
      * List of ChangeFile
      */
     private List<ChangeFile> files;
-    
+
+    /**
+     * List of tags
+     */
+    private List<String> tags;
+
     /**
      * The SCM revision id for this changeset.
      * @since 1.3
@@ -415,6 +420,44 @@ public class ChangeSet
     }
 
     /**
+     * Getter for property tags.
+     *
+     * @return Value of property author.
+     */
+    public List<String> getTags()
+    {
+        if ( tags == null )
+        {
+            return Collections.emptyList();
+        }
+        return tags;
+    }
+
+    /**
+     * Setter for property tags.
+     *
+     * @param tags New value of property tags. This replaces the existing list (if any).
+     */
+    public void setTags( List<String> tags )
+    {
+        this.tags = tags;
+    }
+
+    /**
+     * Setter for property tags.
+     *
+     * @param tag New tag to add to the list of tags.
+     */
+    public void addTag( String tag )
+    {
+        if ( tags == null )
+        {
+            tags = new ArrayList<>();
+        }
+        tags.add( tag );
+    }
+
+    /**
      * @return TODO
      * @since 1.3
      */
@@ -466,6 +509,7 @@ public class ChangeSet
     {
         StringBuilder result = new StringBuilder( author == null ? " null " : author );
         result.append( "\n" ).append( date == null ? "null " : date.toString() ).append( "\n" );
+        result.append( "tags:" ).append( getTags() ).append( "\n" );
         // parent(s)
         if ( parentRevision != null )
         {

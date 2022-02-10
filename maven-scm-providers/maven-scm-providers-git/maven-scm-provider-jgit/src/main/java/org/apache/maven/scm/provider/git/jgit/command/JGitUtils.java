@@ -45,6 +45,7 @@ import org.eclipse.jgit.errors.StopWalkException;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.ProgressMonitor;
+import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.lib.RepositoryBuilder;
 import org.eclipse.jgit.lib.StoredConfig;
@@ -73,7 +74,10 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+
+import static org.eclipse.jgit.lib.Constants.R_TAGS;
 
 /**
  * JGit utility functions.
@@ -462,4 +466,43 @@ public class JGitUtils
         }
     }
 
+    /**
+     * Get a list of tags that has been set in the specified commit.
+     *
+     * @param repo the repository to work on
+     * @param commit the commit for which we want the tags
+     * @return a list of tags, might be empty, but never <code>null</code>
+     */
+    public static List<String> getTags( Repository repo, RevCommit commit ) throws IOException
+    {
+        Map<String, Ref> refList = repo.getRefDatabase().getRefs( R_TAGS );
+
+        List<String> result = new ArrayList<>();
+
+        for ( Map.Entry<String, Ref> refEntry : refList.entrySet() )
+        {
+            ObjectId id = refEntry.getValue().getObjectId();
+            if ( id != null && id.equals( commit.getId() ) )
+            {
+                result.add( refEntry.getKey() );
+            }
+        }
+
+//        try ( RevWalk walk = new RevWalk( repo ) )
+//        {
+//            List<RevTag> list = walk..tagList().call();
+//            ObjectId commitId = ObjectId.fromString("hash");
+//            Collection<ObjectId> commits = new LinkedList<ObjectId>();
+//            for (RevTag tag : list) {
+//                RevObject object = tag.getObject();
+//                if (object.getId().equals(commitId)) {;
+//                    commits.add(object.getId());
+//                }
+//            }
+//        }
+//            RevTag tag = walk.lookupTag(commit.getId());
+//            tag.getTagName();
+//        }
+        return result;
+    }
 }
