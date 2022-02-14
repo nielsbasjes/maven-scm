@@ -487,22 +487,6 @@ public class JGitUtils
                 result.add( refEntry.getKey() );
             }
         }
-
-//        try ( RevWalk walk = new RevWalk( repo ) )
-//        {
-//            List<RevTag> list = walk..tagList().call();
-//            ObjectId commitId = ObjectId.fromString("hash");
-//            Collection<ObjectId> commits = new LinkedList<ObjectId>();
-//            for (RevTag tag : list) {
-//                RevObject object = tag.getObject();
-//                if (object.getId().equals(commitId)) {;
-//                    commits.add(object.getId());
-//                }
-//            }
-//        }
-//            RevTag tag = walk.lookupTag(commit.getId());
-//            tag.getTagName();
-//        }
         return result;
     }
 }
